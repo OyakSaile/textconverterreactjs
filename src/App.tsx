@@ -10,27 +10,20 @@ export function App() {
   const [lower, setLower] = useState<string | null>("");
   const [upper, setUpper] = useState<string | null>("");
   const [removedNumbers, setRemovedNumbers] = useState<string | null>("");
+  const [result, setResult] = useState<string | null>("");
 
   function handleLowerCase() {
-    setUpper("");
-    setRemovedNumbers("");
     const lowerCase = text?.toLowerCase();
-    setLower(lowerCase!);
+    setResult(lowerCase!);
   }
 
   function handleUpperCase() {
-    setLower("");
-    setRemovedNumbers("");
-
     const upperCase = text?.toUpperCase();
-    setUpper(upperCase!);
+    setResult(upperCase!);
   }
   function handleRemoveNumbers() {
-    setLower("");
-    setUpper("");
-
     const removedNumbers = text?.replace(/[0-9]/g, "");
-    setRemovedNumbers(removedNumbers!);
+    setResult(removedNumbers!);
   }
   return (
     <div className={styles.container}>
@@ -66,9 +59,7 @@ export function App() {
         {
           <div className={styles.textBox}>
             <h1>Seu Novo Texto:</h1>
-            <p>
-              {lower} {upper} {removedNumbers}
-            </p>{" "}
+            <p>{result}</p>{" "}
           </div>
         }
 
