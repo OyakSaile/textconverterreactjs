@@ -1,0 +1,75 @@
+.container {
+  background: rgb(38, 38, 38);
+  min-height: 100vh;
+  width: 100%;
+}
+
+.header {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header a {
+  color: blueviolet;
+}
+
+.content {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content h2 {
+  font-size: 3rem;
+}
+
+.content p {
+  color: #7b7b7b;
+}
+
+.textBox {
+  background: rgb(58, 57, 57);
+  border: 0;
+  max-width: 600px;
+  min-height: 60px;
+  resize: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 0.8rem;
+}
+
+.textBox h1 {
+  font-size: 1rem;
+  color: #7b7b7b;
+}
+.textBox p {
+  color: white;
+}
+.buttonsContainer {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+}
+
+.buttonsContainer button {
+  background: blueviolet;
+  border: 0;
+  padding: 1rem 0.8rem;
+  border-radius: 0.5rem;
+  min-width: 150px;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.buttonsContainer button:hover {
+  filter: brightness(0.8);
+}
