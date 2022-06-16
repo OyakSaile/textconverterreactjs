@@ -1,9 +1,10 @@
 import { FormEventHandler, useState } from "react";
 import logo from "./logo.svg";
 import styles from "./styles/Home.module.css";
-import { CgFormatUppercase } from "react-icons/cg";
+import { CgClipboard, CgFormatUppercase } from "react-icons/cg";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { TbLetterCaseLower, TbListNumbers } from "react-icons/tb";
+import { toast } from "react-toastify";
 
 export function App() {
   const [text, setText] = useState<string | null>("");
@@ -13,17 +14,44 @@ export function App() {
   const [result, setResult] = useState<string | null>("");
 
   function handleLowerCase() {
+    if (text === "") {
+      toast.error("Você precisa preencher o Texto");
+      return;
+    }
     const lowerCase = text?.toLowerCase();
     setResult(lowerCase!);
+    toast.success("Texto definido para caixa BAIXA");
   }
 
   function handleUpperCase() {
+    if (text === "") {
+      toast.error("Você precisa preencher o Texto");
+      return;
+    }
     const upperCase = text?.toUpperCase();
     setResult(upperCase!);
+    toast.success("Texto definido para caixa ALTA");
   }
   function handleRemoveNumbers() {
+    if (text === "") {
+      toast.error("Você precisa preencher o Texto");
+      return;
+    }
     const removedNumbers = text?.replace(/[0-9]/g, "");
+    toast.success("Números Removidos");
+
     setResult(removedNumbers!);
+  }
+
+  function handleReverseText() {
+    if (text === "") {
+      toast.error("Você precisa preencher o Texto");
+      return;
+    }
+
+    const reversedText = text?.split("").reverse().join("");
+    setResult(reversedText!);
+    toast.success("Texto Invertido");
   }
   return (
     <div className={styles.container}>
@@ -53,15 +81,19 @@ export function App() {
           className={styles.textBox}
           onBlur={(e) => {
             setText(e.currentTarget.textContent);
+
+            if (e.currentTarget.textContent === "") {
+              setResult("");
+            }
           }}
         ></div>
 
-        {
+        {result && (
           <div className={styles.textBox}>
             <h1>Seu Novo Texto:</h1>
             <p>{result}</p>{" "}
           </div>
-        }
+        )}
 
         <div className={styles.buttonsContainer}>
           <button onClick={() => handleUpperCase()}>
@@ -72,12 +104,32 @@ export function App() {
             Minusculo
             <TbLetterCaseLower size={24} />
           </button>
+          <button onClick={() => handleReverseText()}>
+            Inverter Caracteres
+            <TbLetterCaseLower size={24} />
+          </button>
           <button onClick={() => handleRemoveNumbers()}>
             Remover Números
             <TbListNumbers size={24} />
           </button>
         </div>
       </div>
+
+      {result && (
+        <button
+          className={styles.clipboard}
+          onClick={() => {
+            navigator.clipboard.writeText(result);
+            toast.success("Texto Copiado", {
+              toastId: "copyText",
+              icon: <CgClipboard />,
+            });
+          }}
+        >
+          Copiar
+          <CgClipboard size={24} />
+        </button>
+      )}
     </div>
   );
 }
