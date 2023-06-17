@@ -87,6 +87,7 @@ export function App() {
             }
           }}
         ></div>
+        <p>Quantidade de caracteres {text?.length}</p>
 
         {result && (
           <div className={styles.textBox}>
